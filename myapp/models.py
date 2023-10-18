@@ -34,7 +34,7 @@ class AccountManager(BaseUserManager):
         extra_fields.setdefault('is_superuser', False)
         return self._create_user(email, name, phone, password, **extra_fields)
 
-    def create_superuser(self, email, name, phone, password=None, **extra_fields):
+    def create_superuser(self, email, name="admin", phone="1122", password=None, **extra_fields):
         extra_fields.setdefault('is_staff', True)
         extra_fields.setdefault('is_superuser', True)
 
@@ -49,6 +49,8 @@ class AccountManager(BaseUserManager):
 class CustomUser(AbstractBaseUser, PermissionsMixin):
     email = models.EmailField(unique=True)
     first_name = models.CharField(max_length=30)
+    name = models.CharField(max_length=30)
+    phone = models.CharField(max_length=15)
     last_name = models.CharField(max_length=30)
     is_active = models.BooleanField(default=True)
     is_staff = models.BooleanField(default=False)
